@@ -1,10 +1,11 @@
 <?php
+	$user = $_POST['user'];
 	$firstName = $_POST['firstName'];
 	$lastName = $_POST['lastName'];
 	$gender = $_POST['gender'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
-	$number = $_POST['number'];
+	// $number = math.rng
 
 	// Database connection
 	$conn = new mysqli('localhost','root','','test');
@@ -12,8 +13,8 @@
 		echo "$conn->connect_error";
 		die("Connection Failed : ". $conn->connect_error);
 	} else {
-		$stmt = $conn->prepare("insert into registration(firstName, lastName, gender, email, password, number) values(?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("sssssi", $firstName, $lastName, $gender, $email, $password, $number);
+		$stmt = $conn->prepare("insert into registration(user, firstName, lastName, gender, email, password) values(?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("sssssi", $user, $firstName, $lastName, $gender, $email, $password, $number);
 		$execval = $stmt->execute();
 		echo $execval;
 		echo "Registration successfully...";
